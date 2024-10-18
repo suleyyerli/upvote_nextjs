@@ -20,6 +20,7 @@ model User {
   sessions      Session[]
   // Optional for WebAuthn support
   Authenticator Authenticator[]
+  posts         Post[]          @relation("UserPosts")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -88,6 +89,8 @@ model Post {
   content   String?
   tag       String
   createdAt DateTime @default(now())
+  userId    String
+  user      User     @relation("UserPosts", fields: [userId], references: [id])  
   proposition Proposition[]
 }
 

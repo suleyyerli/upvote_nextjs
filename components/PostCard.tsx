@@ -2,11 +2,14 @@
 import React from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+
 interface PostCardProps {
   title: string;
   content: string;
   tag: string;
   createdAt: string;
+  userImage: string;
 }
 
 const PostCard: React.FC<PostCardProps> = ({
@@ -14,11 +17,17 @@ const PostCard: React.FC<PostCardProps> = ({
   content,
   tag,
   createdAt,
+  userImage,
 }) => {
   return (
     <Card className="p-4 bg-white/40 shadow-sm rounded-md w-full ">
       <CardHeader>
-        <CardTitle>{title}</CardTitle>
+        <div className="flex items-center">
+          <Avatar>
+            <AvatarImage src={userImage} alt="User Avatar" />
+          </Avatar>
+          <CardTitle className="ml-4">{title}</CardTitle>
+        </div>
       </CardHeader>
       <CardContent>
         <div className="mt-2 text-sm text-gray-500">{content}</div>
@@ -34,5 +43,4 @@ const PostCard: React.FC<PostCardProps> = ({
     </Card>
   );
 };
-
 export default PostCard;

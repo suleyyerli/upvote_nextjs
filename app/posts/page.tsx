@@ -10,11 +10,12 @@ interface Post {
   content: string;
   tag: string;
   createdAt: string;
+  user: {
+    image: string;
+  };
 }
 
 const PostsPage: React.FC = () => {
-  // Déclare une variable d'état 'posts' et une fonction 'setPosts' pour la mettre à jour.
-  // Le type de 'posts' est un tableau d'objets de type 'Post', initialisé avec un tableau vide.
   const [posts, setPosts] = useState<Post[]>([]);
 
   useEffect(() => {
@@ -40,6 +41,7 @@ const PostsPage: React.FC = () => {
             content={post.content}
             tag={post.tag}
             createdAt={post.createdAt}
+            userImage={post.user?.image || "https://github.com/shadcn.png"} // Utilisez une image par défaut si user est undefined
           />
         ))}
       </div>
