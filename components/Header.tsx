@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import clsx from "clsx";
-
+import DecoButton from "./Decobutton";
 export const Header = () => {
   return (
     <header className="border-b border-b-accent">
@@ -36,6 +36,16 @@ export const Header = () => {
         >
           Ajouter un post
         </Link>
+        <Link
+          href="/profile"
+          className={clsx(
+            buttonVariants({ variant: "outline" }),
+            "text-orange-500"
+          )}
+        >
+          Profile
+        </Link>
+        <DecoButton />
       </div>
     </header>
   );

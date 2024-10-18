@@ -1,12 +1,9 @@
-import { auth } from "@/src/lib/auth";
-import { LoginButton, LogoutButton } from "../components/AuthButtons";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 
 import clsx from "clsx";
 
 export default async function Home() {
-  const session = await auth();
   return (
     <>
       <div className="flex flex-col justify-center items-center text-center">
@@ -28,14 +25,6 @@ export default async function Home() {
         >
           <Link href="/formulaire">Commencer</Link>
         </div>
-      </div>
-      <div>
-        <h1>
-          {session?.user
-            ? "Authentifié" + session.user.email
-            : "Non authentifié"}
-        </h1>
-        <div>{!session?.user ? <LoginButton /> : <LogoutButton />}</div>
       </div>
     </>
   );
