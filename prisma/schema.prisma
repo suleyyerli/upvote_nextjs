@@ -21,6 +21,7 @@ model User {
   // Optional for WebAuthn support
   Authenticator Authenticator[]
   posts         Post[]          @relation("UserPosts")
+  propositions  Proposition[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -96,15 +97,16 @@ model Post {
 
 model Proposition {
   id        Int      @id @default(autoincrement())
-  title     String
+  content   String
   createdAt DateTime @default(now())
-  ip        String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
 
   post   Post  @relation(fields: [postId], references: [id])
   postId Int
   vote    Vote[]
 
-  @@unique([postId, title])
+  @@unique([postId, content])
 }
 
 model Vote {

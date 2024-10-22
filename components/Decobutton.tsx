@@ -13,7 +13,7 @@ export default function DecoButton() {
   };
   return (
     <Button
-      className="text-orange-500 bg-orange-500/20"
+      className="text-purple-400 bg-purple-400/20"
       onClick={handleSignOut}
     >
       <LogOut className="w-4 h-4" />

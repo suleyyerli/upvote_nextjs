@@ -6,13 +6,13 @@ export const Header = () => {
   return (
     <header className="border-b border-b-accent">
       <div className="flex items-center py-2 max-w-6xl m-auto gap-1">
-        <h2 className="text-2xl font-bold mr-auto">UPvote^^</h2>
+        <h2 className="text-2xl font-bold mr-auto text-gray-800">UPvote^^</h2>
 
         <Link
           href="/"
           className={clsx(
             buttonVariants({ variant: "outline" }),
-            "text-orange-500"
+            "text-purple-400"
           )}
         >
           Accueil
@@ -22,7 +22,7 @@ export const Header = () => {
           href="/posts"
           className={clsx(
             buttonVariants({ variant: "outline" }),
-            "text-orange-500"
+            "text-purple-400"
           )}
         >
           Liste des posts
@@ -31,7 +31,7 @@ export const Header = () => {
           href="/posts/creation"
           className={clsx(
             buttonVariants({ variant: "outline" }),
-            "text-orange-500"
+            "text-purple-400"
           )}
         >
           Ajouter un post
@@ -40,7 +40,7 @@ export const Header = () => {
           href="/profile"
           className={clsx(
             buttonVariants({ variant: "outline" }),
-            "text-orange-500"
+            "text-purple-400"
           )}
         >
           Profile

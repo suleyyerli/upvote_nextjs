@@ -3,6 +3,7 @@
 
 import React, { useEffect, useState } from "react";
 import PostCard from "@/components/PostCard";
+import Link from "next/link";
 
 interface Post {
   id: number;
@@ -30,19 +31,20 @@ const PostsPage: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4 max-w-2xl">
-      <h1 className="text-5xl font-bold mb-4 text-center gap-4 p-4 ">
+      <h1 className="text-5xl font-bold mb-4 text-center gap-4 p-4 text-gray-800">
         Liste des posts
       </h1>
       <div className="flex flex-col gap-4 p-4 ">
         {posts.map((post) => (
-          <PostCard
-            key={post.id}
-            title={post.title}
-            content={post.content}
-            tag={post.tag}
-            createdAt={post.createdAt}
-            userImage={post.user?.image || "https://github.com/shadcn.png"} // Utilisez une image par défaut si user est undefined
-          />
+          <Link href={`/posts/${post.id}`} key={post.id}>
+            <PostCard
+              title={post.title}
+              content={post.content}
+              tag={post.tag}
+              createdAt={post.createdAt}
+              userImage={post.user?.image || "https://github.com/shadcn.png"}
+            />
+          </Link>
         ))}
       </div>
     </div>

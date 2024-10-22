@@ -42,21 +42,24 @@ export default function CreationPost() {
   return (
     <form
       onSubmit={handleSubmit} // Liaison de la fonction de soumission au formulaire
-      className="space-y-4 p-4 bg-white/40 shadow-xl max-w-md mx-auto rounded-md" // Classes de style pour le formulaire
+      className="space-y-4 p-4 shadow-none max-w-md mx-auto rounded-md mt-10 bg-white/40 border-2 border-purple-400/20" // Classes de style pour le formulaire
     >
+      <h2 className="text-gray-800 text-2xl font-bold">Créer un post</h2>
       <div>
-        <label className="block text-sm font-medium text-gray-700">Titre</label>
+        <label className="block text-sm font-medium text-purple-400">
+          Titre
+        </label>
         <Input
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)} // Mise à jour de l'état du titre
           placeholder="Title"
-          className="mt-1 block w-full"
+          className="mt-1 block w-full bg-gray-400/20"
         />
       </div>
       {/* ne pas le mettre obligatoire */}
       <div>
-        <label className="block text-sm font-medium text-gray-700">
+        <label className="block text-sm font-medium text-purple-400">
           Content
         </label>
         <Input
@@ -64,20 +67,20 @@ export default function CreationPost() {
           value={content}
           onChange={(e) => setContent(e.target.value)} // Mise à jour de l'état du content
           placeholder="Content"
-          className="mt-1 block w-full"
+          className="mt-1 block w-full bg-gray-400/20"
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700">Tag</label>
+        <label className="block text-sm font-medium text-purple-400">Tag</label>
         <Input
           type="text"
           value={tag}
           onChange={(e) => setTag(e.target.value)} // Mise à jour de l'état du tag
           placeholder="Tag"
-          className="mt-1 block w-full"
+          className="mt-1 block w-full bg-gray-400/20"
         />
       </div>
-      <Button type="submit" className="w-full">
+      <Button type="submit" className="w-full bg-gray-800">
         Créer un post
       </Button>
     </form>

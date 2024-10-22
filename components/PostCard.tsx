@@ -26,16 +26,17 @@ const PostCard: React.FC<PostCardProps> = ({
           <Avatar>
             <AvatarImage src={userImage} alt="User Avatar" />
           </Avatar>
-          <CardTitle className="ml-4">{title}</CardTitle>
+          <CardTitle className="ml-4 text-gray-700">{title}</CardTitle>
         </div>
       </CardHeader>
       <CardContent>
         <div className="mt-2 text-sm text-gray-500">{content}</div>
         <div className="mt-2 text-sm text-gray-500">
-          <Badge variant="secondary" className="bg-gray-400/20">
+          <Badge variant="secondary" className="bg-gray-400/20 text-gray-700">
             #{tag}
           </Badge>
         </div>
+
         <div className="mt-2 text-sm text-gray-500">
           Posté le: {new Date(createdAt).toLocaleDateString()}
         </div>
