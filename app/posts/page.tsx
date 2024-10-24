@@ -1,33 +1,14 @@
 // app/posts/page.tsx
-"use client";
-
-import React, { useEffect, useState } from "react";
+import { prisma } from "@/src/lib/prisma";
 import PostCard from "@/components/PostCard";
 import Link from "next/link";
 
-interface Post {
-  id: number;
-  title: string;
-  content: string;
-  tag: string;
-  createdAt: string;
-  user: {
-    image: string;
-  };
-}
-
-const PostsPage: React.FC = () => {
-  const [posts, setPosts] = useState<Post[]>([]);
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const response = await fetch("/api/posts");
-      const data = await response.json();
-      setPosts(data);
-    };
-
-    fetchPosts();
-  }, []);
+export default async function PostsPage() {
+  // Requete pour récupérer tous les posts
+  const posts = await prisma.post.findMany({
+    orderBy: { createdAt: "desc" },
+    include: { user: { select: { image: true, name: true } } },
+  });
 
   return (
     <div className="container mx-auto p-4 max-w-2xl">
@@ -38,17 +19,16 @@ const PostsPage: React.FC = () => {
         {posts.map((post) => (
           <Link href={`/posts/${post.id}`} key={post.id}>
             <PostCard
-              title={post.title}
-              content={post.content}
-              tag={post.tag}
-              createdAt={post.createdAt}
+              title={post.title || ""}
+              content={post.content || ""}
+              tag={post.tag || ""}
+              createdAt={post.createdAt.toString()}
               userImage={post.user?.image || "https://github.com/shadcn.png"}
+              userName={post.user?.name || "Nom inconnue"}
             />
           </Link>
         ))}
       </div>
     </div>
   );
-};
-
-export default PostsPage;
+}

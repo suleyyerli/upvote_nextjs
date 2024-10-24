@@ -1,44 +1,49 @@
-// Formulaire pour ajouter une proposition
-
 "use client";
 
-// Importation des hooks et composants nécessaires
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 // Définition du composant de création de post
 export default function PropositionForm() {
   // Déclaration des états pour les champs de saisie
   const [content, setContent] = useState("");
-
+  const params = useParams();
+  const router = useRouter();
   // Fonction de gestion de la soumission du formulaire
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Empêche le comportement par défaut du formulaire
+    e.preventDefault();
 
-    // Envoi des données du formulaire à l'API
+    const postId = parseInt(params.id as string);
+
     const response = await fetch("/api/propositions", {
-      method: "POST", // Méthode HTTP pour la requête
+      method: "POST",
       headers: {
-        "Content-Type": "application/json", // Type de contenu de la requête
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ content }), // Corps de la requête avec les données du formulaire
+      body: JSON.stringify({ content, postId }), // Utiliser la variable postId
     });
 
     if (response.ok) {
-      const nouveauProposition = await response.json(); // Récupération de la réponse JSON
-      console.log("Proposition créée:", nouveauProposition); // Affichage de la proposition créée dans la console
+      const nouveauProposition = await response.json();
+      console.log("Proposition créée:", nouveauProposition);
+      setContent("");
+      router.refresh();
     } else {
-      console.error("Failed to create proposition"); // Affichage d'un message d'erreur en cas d'échec dans la console
+      console.error("Failed to create proposition");
     }
   };
 
   // Rendu du composant
   return (
-    <Card className="p-4 max-w-md mx-auto mt-10">
+    <Card className="p-4 shadow-none rounded-md w-full ">
       <form onSubmit={handleSubmit}>
-        <h2 className="text-2xl font-bold">Ajouter une proposition</h2>
+        <h2 className="text-2xl font-bold text-gray-700">
+          Ajouter une proposition
+        </h2>
         <Input
           type="text"
           value={content}
@@ -46,7 +51,7 @@ export default function PropositionForm() {
           placeholder="Content"
           className="mt-2"
         />
-        <Button type="submit" className="mt-4 w-full">
+        <Button type="submit" className="mt-4 w-full bg-purple-400">
           Ajouter
         </Button>
       </form>

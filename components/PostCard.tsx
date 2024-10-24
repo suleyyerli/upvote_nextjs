@@ -10,6 +10,7 @@ interface PostCardProps {
   tag: string;
   createdAt: string;
   userImage: string;
+  userName: string; // Ajout du nom de l'utilisateur
 }
 
 const PostCard: React.FC<PostCardProps> = ({
@@ -18,27 +19,33 @@ const PostCard: React.FC<PostCardProps> = ({
   tag,
   createdAt,
   userImage,
+  userName, // Ajout du nom de l'utilisateur
 }) => {
   return (
-    <Card className="p-4 bg-white/40 shadow-sm rounded-md w-full ">
+    <Card className="shadow-none rounded-3xl w-full ">
       <CardHeader>
         <div className="flex items-center">
           <Avatar>
             <AvatarImage src={userImage} alt="User Avatar" />
           </Avatar>
+          <p className="ml-2 text-gray-700 font-semibold text-sm">{userName}</p>
           <CardTitle className="ml-4 text-gray-700">{title}</CardTitle>
         </div>
       </CardHeader>
       <CardContent>
         <div className="mt-2 text-sm text-gray-500">{content}</div>
         <div className="mt-2 text-sm text-gray-500">
-          <Badge variant="secondary" className="bg-gray-400/20 text-gray-700">
-            #{tag}
+          <Badge className="mt-2 bg-gray-400/20 text-gray-700">
+            Posté le: {new Date(createdAt).toLocaleDateString()}
           </Badge>
-        </div>
-
-        <div className="mt-2 text-sm text-gray-500">
-          Posté le: {new Date(createdAt).toLocaleDateString()}
+          <div className="flex mt-3">
+            <Badge
+              variant="secondary"
+              className="p-2 bg-gray-400/20 text-gray-700 "
+            >
+              #{tag}
+            </Badge>
+          </div>
         </div>
       </CardContent>
     </Card>

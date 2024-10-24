@@ -80,7 +80,7 @@ export default function CreationPost() {
           className="mt-1 block w-full bg-gray-400/20"
         />
       </div>
-      <Button type="submit" className="w-full bg-gray-800">
+      <Button type="submit" className="w-full bg-purple-400">
         Créer un post
       </Button>
     </form>

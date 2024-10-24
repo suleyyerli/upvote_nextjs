@@ -1,16 +1,65 @@
-"use client";
-
-// Page qui affiche un post spécifique avec les proposition des utilisateurs
-// Raffiche le post sur lequel on a cliqué
-// Affiche les propositions des utilisateurs
-// Affiche le bouton pour ajouter une proposition
+import { prisma } from "@/src/lib/prisma";
 import PropositionForm from "@/components/PropositionForm";
+import PropositionCard from "@/components/PropositionCard";
+import PostCard from "@/components/PostCard";
+import { Separator } from "@/components/ui/separator";
+import { ArrowDown } from "lucide-react";
 
-export default function DetailPost() {
+export default async function DetailPost({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const post = await prisma.post.findUnique({
+    where: { id: parseInt(params.id) },
+    include: {
+      proposition: {
+        orderBy: { createdAt: "desc" },
+        include: { user: { select: { image: true } } },
+      },
+      user: { select: { image: true, name: true } },
+    },
+  });
+
+  if (!post) {
+    return <div>Post not found</div>;
+  }
+
   return (
-    <div>
-      <h1>Detail d&apos;un post</h1>
-      <PropositionForm />
+    <div className="container mx-auto p-4 max-w-2xl">
+      <div className="flex flex-col gap-4 p-4">
+        <h1 className="text-5xl font-bold mb-4 text-center gap-4 p-4 text-gray-700">
+          Commentez
+        </h1>
+        <PropositionForm />
+        <div>
+          <PostCard
+            title={post.title || ""}
+            content={post.content || ""}
+            tag={post.tag || ""}
+            createdAt={post.createdAt.toString()}
+            userImage={post.user?.image || "https://github.com/shadcn.png"}
+            userName={post.user?.name || "Nom inconnue"}
+          />
+        </div>
+        <Separator />
+        <div className="flex justify-center my-4">
+          <ArrowDown className="w-10 h-10 text-gray-700" />
+        </div>
+
+        {post.proposition.map((proposition) => (
+          <PropositionCard
+            key={proposition.id}
+            propositionId={proposition.id}
+            content={proposition.content}
+            createdAt={proposition.createdAt.toString()}
+            userImage={
+              proposition.user?.image || "https://github.com/shadcn.png"
+            }
+            userName={post.user?.name || "Nom inconnue"}
+          />
+        ))}
+      </div>
     </div>
   );
 }

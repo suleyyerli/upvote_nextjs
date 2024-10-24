@@ -6,6 +6,7 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardTitle } from "@/components/ui/card";
 import { Trash } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 
 interface Post {
   id: number;
@@ -38,8 +39,9 @@ const ProfilePage: React.FC = () => {
   }, []);
 
   const handleDelete = async (postId: number) => {
-    const response = await fetch(`/api/posts/${postId}`, {
+    const response = await fetch(`/api/posts/supp`, {
       method: "DELETE",
+      body: JSON.stringify({ postId }),
     });
 
     if (response.ok) {
@@ -53,26 +55,26 @@ const ProfilePage: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4 max-w-2xl border-2 border-purple-400/20 rounded-md mt-10">
-      <h2 className="text-2xl font-bold border-b-2 border-gray-300 pb-4 mb-4 text-gray-800">
-        Profile
-      </h2>
-      <div className="flex items-center space-x-4 p-4 border-b-2 border-gray-300">
+      <h2 className="text-2xl font-bold pb-4 mb-4 text-gray-700">Profile</h2>
+      <Separator />
+      <div className="flex flex-col gap-4 p-4">
         <Avatar>
           <AvatarImage src={user?.image} alt="User Avatar" />
         </Avatar>
-        <div>
-          <h1 className="text-2xl font-bold text-gray-800">{user?.name}</h1>
-          <p className="text-sm text-gray-500">{user?.email}</p>
-          <p className="text-sm text-gray-500">
-            Nombre de posts : {posts.length}
-          </p>
-        </div>
+
+        <h1 className="text-2xl font-bold text-gray-700">{user?.name}</h1>
+        <p className="text-sm text-gray-500">{user?.email}</p>
+        <p className="text-sm text-gray-500">
+          Nombre de posts : {posts.length}
+        </p>
       </div>
+      <Separator />
+
       <div className="mt-4 space-y-4">
         {posts.map((post) => (
           <Card
             key={post.id}
-            className="p-4 bg-white/40 shadow-sm rounded-md text-gray-800"
+            className="p-4 shadow-sm rounded-md text-gray-700"
           >
             <CardTitle>{post.title}</CardTitle>
 
