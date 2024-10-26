@@ -14,10 +14,11 @@ export default async function DetailPost({
     where: { id: parseInt(params.id) },
     include: {
       proposition: {
-        orderBy: { createdAt: "desc" },
+        orderBy: { likes: "desc" }, // Trier par le nombre de likes
         include: { user: { select: { image: true } } },
       },
       user: { select: { image: true, name: true } },
+      _count: { select: { proposition: true } },
     },
   });
 
@@ -28,7 +29,7 @@ export default async function DetailPost({
   return (
     <div className="container mx-auto p-4 max-w-2xl">
       <div className="flex flex-col gap-4 p-4">
-        <h1 className="text-5xl font-bold mb-4 text-center gap-4 p-4 text-gray-700">
+        <h1 className="bg-clip-text text-transparent bg-gradient-to-b from-purple-300 to-purple-500">
           Commentez
         </h1>
         <PropositionForm />
@@ -40,6 +41,7 @@ export default async function DetailPost({
             createdAt={post.createdAt.toString()}
             userImage={post.user?.image || "https://github.com/shadcn.png"}
             userName={post.user?.name || "Nom inconnue"}
+            propositionCount={post._count.proposition}
           />
         </div>
         <Separator />
@@ -57,6 +59,8 @@ export default async function DetailPost({
               proposition.user?.image || "https://github.com/shadcn.png"
             }
             userName={post.user?.name || "Nom inconnue"}
+            likes={proposition.likes}
+            dislikes={proposition.dislikes}
           />
         ))}
       </div>

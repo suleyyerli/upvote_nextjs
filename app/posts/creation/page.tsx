@@ -44,7 +44,9 @@ export default function CreationPost() {
       onSubmit={handleSubmit} // Liaison de la fonction de soumission au formulaire
       className="space-y-4 p-4 shadow-none max-w-md mx-auto rounded-md mt-10 bg-white/40 border-2 border-purple-400/20" // Classes de style pour le formulaire
     >
-      <h2 className="text-gray-800 text-2xl font-bold">Créer un post</h2>
+      <h2 className="bg-clip-text text-transparent bg-gradient-to-b from-purple-300 to-purple-500 text-2xl font-bold">
+        Créer un post
+      </h2>
       <div>
         <label className="block text-sm font-medium text-purple-400">
           Titre

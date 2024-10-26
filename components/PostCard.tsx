@@ -3,6 +3,7 @@ import React from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { MessageSquare, MessageSquarePlus } from "lucide-react";
 
 interface PostCardProps {
   title: string;
@@ -10,7 +11,8 @@ interface PostCardProps {
   tag: string;
   createdAt: string;
   userImage: string;
-  userName: string; // Ajout du nom de l'utilisateur
+  userName: string;
+  propositionCount: number; // Ajout du compteur de propositions
 }
 
 const PostCard: React.FC<PostCardProps> = ({
@@ -19,10 +21,11 @@ const PostCard: React.FC<PostCardProps> = ({
   tag,
   createdAt,
   userImage,
-  userName, // Ajout du nom de l'utilisateur
+  userName,
+  propositionCount, // Ajout du compteur de propositions
 }) => {
   return (
-    <Card className="shadow-none rounded-3xl w-full ">
+    <Card className="shadow-none rounded-3xl w-full">
       <CardHeader>
         <div className="flex items-center">
           <Avatar>
@@ -33,22 +36,30 @@ const PostCard: React.FC<PostCardProps> = ({
         </div>
       </CardHeader>
       <CardContent>
-        <div className="mt-2 text-sm text-gray-500">{content}</div>
+        <div className="mt-2 text-lg text-gray-500">{content}</div>
         <div className="mt-2 text-sm text-gray-500">
-          <Badge className="mt-2 bg-gray-400/20 text-gray-700">
+          <Badge className="mt-2 text-purple-400 bg-purple-400/20 hover:bg-purple-400/40">
             Posté le: {new Date(createdAt).toLocaleDateString()}
           </Badge>
           <div className="flex mt-3">
             <Badge
               variant="secondary"
-              className="p-2 bg-gray-400/20 text-gray-700 "
+              className="p-2 text-purple-400 bg-purple-400/20 hover:bg-purple-400/40"
             >
               #{tag}
             </Badge>
+          </div>
+          <div className="flex justify-end text-purple-400">
+            <MessageSquarePlus className="w-4 h-4" /> Commentez
+          </div>
+          <div className="flex text-sm text-purple-400 justify-end">
+            <MessageSquare className="w-4 h-4" /> {propositionCount}{" "}
+            commentaires
           </div>
         </div>
       </CardContent>
     </Card>
   );
 };
+
 export default PostCard;

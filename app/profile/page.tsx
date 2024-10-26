@@ -51,11 +51,14 @@ const ProfilePage: React.FC = () => {
     }
   };
 
-  if (!user) return <div>Loading...</div>;
+  if (!user)
+    return <div>Chargement... ou veuillez vous connecter ou vous inscrire</div>;
 
   return (
     <div className="container mx-auto p-4 max-w-2xl border-2 border-purple-400/20 rounded-md mt-10">
-      <h2 className="text-2xl font-bold pb-4 mb-4 text-gray-700">Profile</h2>
+      <h2 className="text-2xl font-bold pb-4 mb-4 bg-clip-text text-transparent bg-gradient-to-b from-purple-300 to-purple-500">
+        Profile
+      </h2>
       <Separator />
       <div className="flex flex-col gap-4 p-4">
         <Avatar>

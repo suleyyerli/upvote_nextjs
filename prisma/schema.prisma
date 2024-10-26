@@ -101,10 +101,10 @@ model Proposition {
   createdAt DateTime @default(now())
   userId    String
   user      User     @relation(fields: [userId], references: [id])
-
-  post   Post  @relation(fields: [postId], references: [id])
-  postId Int
-
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    Int
+  likes     Int      @default(0)
+  dislikes  Int      @default(0)
 
   @@unique([postId, content])
 }
