@@ -29,7 +29,7 @@ export default async function DetailPost({
   return (
     <div className="container mx-auto p-4 max-w-2xl">
       <div className="flex flex-col gap-4 p-4">
-        <h1 className="bg-clip-text text-transparent bg-gradient-to-b from-purple-300 to-purple-500">
+        <h1 className="text-5xl font-bold mb-4 text-center gap-4 p-4 bg-clip-text text-transparent bg-gradient-to-b from-purple-100 to-purple-500">
           Commentez
         </h1>
         <PropositionForm />

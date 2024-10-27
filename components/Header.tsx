@@ -48,6 +48,15 @@ export const Header = () => {
         >
           Profile
         </Link>
+        <Link
+          href="/admin"
+          className={clsx(
+            buttonVariants({}),
+            "text-purple-400 bg-purple-400/20"
+          )}
+        >
+          Admin
+        </Link>
         <DecoButton />
       </div>
     </header>
