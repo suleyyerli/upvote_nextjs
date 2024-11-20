@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 
 export default function AdminPage() {
@@ -101,61 +101,69 @@ export default function AdminPage() {
 
   if (!isAdmin) {
     return (
-      <div>
-        Vous n&apos;êtes pas autorisé à accéder à cette page. Ou patientez
-        quelques instants.
+      <div className="flex justify-center items-center h-full">
+        ! Vous n&apos;êtes pas autorisé à accéder à cette page. Ou si vous êtes
+        un admin patientez quelques instants. !
       </div>
     );
   }
 
   return (
-    <Card className="mb-4 p-4 gap-4">
-      <div className="container mx-auto p-4 gap-4">
-        <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
+    <div className="flexjustify-center items-center text-center mt-20">
+      <Card className="mb-4 p-4 gap-4">
+        <div className="container mx-auto p-4 gap-4">
+          <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
 
-        <h2 className="text-xl font-bold">
-          Définir un utilisateur comme Admin
-        </h2>
+          <h2 className="text-xl font-bold">
+            Définir un utilisateur comme Admin
+          </h2>
 
-        <Input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Adresse e-mail de l'utilisateur"
-          className="border p-2 mb-2"
-        />
-        <Button onClick={handleSetAdmin}>Définir comme Admin</Button>
+          <Input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Adresse e-mail de l'utilisateur"
+            className="border p-2 mb-2"
+          />
+          <Button onClick={handleSetAdmin}>Définir comme Admin</Button>
 
-        <Separator className="my-4" />
+          <Separator className="my-4" />
 
-        <h2 className="text-xl font-bold">Utilisateurs</h2>
+          <h2 className="text-xl font-bold">Utilisateurs</h2>
 
-        {users.map((user: { id: string; name: string; email: string }) => (
-          <div key={user.id} className="flex justify-between items-center mb-2">
-            <li>
-              <span>
-                {user.name} ({user.email})
-              </span>
-            </li>
-            <Button onClick={() => handleDelete(user.id, "user")}>
-              Delete
-            </Button>
-          </div>
-        ))}
-        <Separator className="my-4" />
-        <h2 className="text-xl font-bold">Posts</h2>
+          {users.map((user: { id: string; name: string; email: string }) => (
+            <div
+              key={user.id}
+              className="flex justify-between items-center mb-2"
+            >
+              <li>
+                <span>
+                  {user.name} ({user.email})
+                </span>
+              </li>
+              <Button onClick={() => handleDelete(user.id, "user")}>
+                Delete
+              </Button>
+            </div>
+          ))}
+          <Separator className="my-4" />
+          <h2 className="text-xl font-bold">Posts</h2>
 
-        {posts.map((post: { id: string; title: string }) => (
-          <div key={post.id} className="flex justify-between items-center mb-2">
-            <li>
-              <span>{post.title}</span>
-            </li>
-            <Button onClick={() => handleDelete(post.id, "post")}>
-              Delete
-            </Button>
-          </div>
-        ))}
-      </div>
-    </Card>
+          {posts.map((post: { id: string; title: string }) => (
+            <div
+              key={post.id}
+              className="flex justify-between items-center mb-2"
+            >
+              <li>
+                <span>{post.title}</span>
+              </li>
+              <Button onClick={() => handleDelete(post.id, "post")}>
+                Delete
+              </Button>
+            </div>
+          ))}
+        </div>
+      </Card>
+    </div>
   );
 }

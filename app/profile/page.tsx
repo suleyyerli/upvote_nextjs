@@ -52,7 +52,11 @@ const ProfilePage: React.FC = () => {
   };
 
   if (!user)
-    return <div>Chargement... ou veuillez vous connecter ou vous inscrire</div>;
+    return (
+      <div className="flex justify-center items-center h-full">
+        ! Chargement... ou veuillez vous connecter ou vous inscrire !
+      </div>
+    );
 
   return (
     <div className="container mx-auto p-4 max-w-2xl border-2 border-purple-400/20 rounded-md mt-10">

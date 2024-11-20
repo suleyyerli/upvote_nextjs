@@ -15,6 +15,7 @@ export default function RootLayout({
     <html className="h-full" lang="en">
       <body className="flex flex-col h-full">
         <Header />
+
         <div className="flex-1 max-w-6xl m-auto py-12 w-full">{children}</div>
       </body>
     </html>

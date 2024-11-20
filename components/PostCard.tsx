@@ -12,7 +12,7 @@ interface PostCardProps {
   createdAt: string;
   userImage: string;
   userName: string;
-  propositionCount: number; // Ajout du compteur de propositions
+  propositionCount: number;
 }
 
 const PostCard: React.FC<PostCardProps> = ({
@@ -22,7 +22,7 @@ const PostCard: React.FC<PostCardProps> = ({
   createdAt,
   userImage,
   userName,
-  propositionCount, // Ajout du compteur de propositions
+  propositionCount,
 }) => {
   return (
     <Card className="shadow-none rounded-3xl w-full">
@@ -36,7 +36,7 @@ const PostCard: React.FC<PostCardProps> = ({
         </div>
       </CardHeader>
       <CardContent>
-        <div className="mt-2 text-lg text-gray-500">{content}</div>
+        <div className="mt-2 text-base text-gray-500">{content}</div>
         <div className="mt-2 text-sm text-gray-500">
           <Badge className="mt-2 text-purple-400 bg-purple-400/20 hover:bg-purple-400/40">
             Posté le: {new Date(createdAt).toLocaleDateString()}

@@ -56,7 +56,7 @@ const PropositionCard: React.FC<PropositionCardProps> = ({
         </div>
       </CardHeader>
       <CardContent>
-        <div className="mt-2 text-lg text-gray-500">{content}</div>
+        <div className="mt-2 text-base text-gray-500">{content}</div>
         <Badge className="mt-2 text-purple-400 bg-purple-400/20 hover:bg-purple-400/40">
           Posté le: {new Date(createdAt).toLocaleDateString()}
         </Badge>
