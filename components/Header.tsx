@@ -3,14 +3,25 @@ import { buttonVariants } from "@/components/ui/button";
 import clsx from "clsx";
 import DecoButton from "./Decobutton";
 import Image from "next/image";
+import { prisma } from "@/src/lib/prisma";
 import { auth } from "@/src/lib/auth";
 
 export const Header = async () => {
   const session = await auth();
+  const userId = session?.user?.id;
 
-  const userStatus = session?.user ? true : false;
+  let userStatus = false;
+  let userStatusAdmin = false;
 
-  const userStatusAdmin = session?.user?.role === "admin" ? true : false;
+  if (userId) {
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { role: true },
+    });
+
+    userStatus = !!user;
+    userStatusAdmin = user?.role === "admin";
+  }
 
   return (
     <header className="fixed top-0 left-0 w-full bg-white bg-opacity-80 backdrop-blur-md border-b border-b-accent z-50">
